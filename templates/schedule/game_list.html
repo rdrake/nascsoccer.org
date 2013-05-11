@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% load tz %}
+
+{% block pagetitle %}
+{% if team %}{{ team.name }} |{% endif %}{{ age_group.name}} | {{ competition.name }}{{ super }}
+{% endblock %}
+
+{% block articletitle %}
+<a href="{% url "competition" %}">Schedule</a>
+&#187;
+<a href="{% url "age_group" competition=competition.slug %}">
+  {{ competition.name }}
+</a>
+&#187;
+{% if team %}<a href="{% url "schedule" competition=competition.slug age_group=age_group.slug %}">{% endif %}
+  {{ age_group.name }}
+{% if team %}</a>{% endif %}
+{% if team %}
+&#187;
+{{ age_group.name }}
+{% endif %}
+{% endblock %}
+
+{% block content %}
+
+<section class="row">
+  <table class="large-12 columns">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Home</th>
+        <th></th>
+        <th>Away</th>
+        <th>Location</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for game in object_list %}
+      <tr>
+        <td>{{ game.when|date }}</td>
+        <td>{{ game.when|time }}</td>
+        <td>
+          {% if game.home_team %}
+            <a href="{% url "team_schedule" competition=competition.slug age_group=age_group.slug team=game.home_team.slug %}">
+              {{ game.home_team.name }}
+            </a>
+          {% else %}
+            TBA
+          {% endif %}
+        </td>
+        <td>vs.</td>
+        <td>
+          {% if game.away_team %}
+            <a href="{% url "team_schedule" competition=competition.slug age_group=age_group.slug team=game.away_team.slug %}">
+              {{ game.away_team.name }}
+            </a>
+          {% else %}
+            {% if game.bye %}
+              "bye"
+            {% else %}
+              TBA
+            {% endif %}
+          {% endif %}
+        </td>
+        <td>
+          {% if game.location %}
+          <a href="{% url "location" slug=game.location.slug %}">
+            {{ game.location.name }}
+          </a>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}

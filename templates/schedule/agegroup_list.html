@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}{{ competition.name }}{% endblock %}
+
+{% block content %}
+  <section class="row">
+    <ul class="large-12 columns">
+      {% for age_group in object_list %}
+      <li><a href="{% url "schedule" competition=competition.slug age_group=age_group.slug %}">{{ age_group.name }}</a></li>
+      {% endfor %}
+    </ul>
+  </section>
+{% endblock %}

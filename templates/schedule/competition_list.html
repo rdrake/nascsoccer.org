@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block pagetitle %}Schedules{{ super }}{% endblock %}
+{% block articletitle %}Schedules{% endblock %}
+
+{% block content %}
+<div class="row">
+  <ul class="large-12 columns">
+  {% for competition in object_list %}
+    <li><a href="{% url "age_group" competition=competition.slug %}">{{ competition.name }}</a></li>
+  {% endfor %}
+  </ul>
+</div>
+{% endblock %}
