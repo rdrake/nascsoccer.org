@@ -1,9 +1,11 @@
 {% extends "schedule/default.html" %}
 
 {% load tz %}
+{% load cache %}
 
 {% block content %}
 <section class="row">
+  {% cache 600 games %}
   <table class="large-12 columns">
     <thead>
       <tr>
@@ -54,5 +56,6 @@
       {% endfor %}
     </tbody>
   </table>
+  {% endcache %}
 </section>
 {% endblock %}

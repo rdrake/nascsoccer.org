@@ -48,8 +48,12 @@ STATICFILES_FINDERS = (
 TEMPLATE_LOADERS = (
     "django_haml.filesystem.Loader",
     "django_haml.app_directories.Loader",
-    "django.template.loaders.filesystem.Loader",
-    "django.template.loaders.app_directories.Loader",
+    ("django.template.loaders.cached.Loader", (
+        "django.template.loaders.filesystem.Loader",
+        "django.template.loaders.app_directories.Loader",
+    )),
+#    "django.template.loaders.filesystem.Loader",
+#    "django.template.loaders.app_directories.Loader",
 )
 
 MIDDLEWARE_CLASSES = (
@@ -128,4 +132,11 @@ INTERNAL_IPS = ("127.0.0.1",)
 
 LEAFLET_CONFIG = {
     "TILES_URL": "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+}
+
+CACHES = {
+    "default": {
+        "BACKEND": "redis_cache.RedisCache",
+        "LOCATION": "/tmp/redis.sock",
+    }
 }
