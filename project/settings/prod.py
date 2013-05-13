@@ -16,12 +16,12 @@ CACHES = {
     }
 }
 
-COMPRESS_CSS_FILTERS = [
-    "compressor.filters.css_default.CssAbsoluteFilter",
-    "compressor.filters.cssmin.CSSMinFilter",
-]
-
-COMPRESS_STORAGE = [
-    "compressor.storage.CompressorFileStorage",
-    "compressor.storage.GzipCompressorFileStorage",
-]
+#COMPRESS_CSS_FILTERS = [
+#    "compressor.filters.css_default.CssAbsoluteFilter",
+#    "compressor.filters.cssmin.CSSMinFilter",
+#]
+#
+#COMPRESS_STORAGE = [
+#    "compressor.storage.CompressorFileStorage",
+#    "compressor.storage.GzipCompressorFileStorage",
+#]
