@@ -1,7 +1,5 @@
 static/admin
-static/css
-static/fiber
-static/grappelli
+static/filer/
 
 *.log
 *.pot

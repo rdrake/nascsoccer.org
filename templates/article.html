@@ -1,0 +1,10 @@
+{% load humanize %}
+
+<article>
+  <header>
+    <h3>{{ page.title }}</h3>
+    <p>Posted <time pubdate="pubdate" datetime="{{ page.posted }}">{{ page.posted|naturaltime }}</time></p>
+  </header>
+
+  {{ page.content }}
+</article>

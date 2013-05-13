@@ -1,29 +1,8 @@
-{% extends "base.html" %}
+{% extends "schedule/default.html" %}
 
 {% load tz %}
 
-{% block pagetitle %}
-{% if team %}{{ team.name }} |{% endif %}{{ age_group.name}} | {{ competition.name }}{{ super }}
-{% endblock %}
-
-{% block articletitle %}
-<a href="{% url "competition" %}">Schedule</a>
-&#187;
-<a href="{% url "age_group" competition=competition.slug %}">
-  {{ competition.name }}
-</a>
-&#187;
-{% if team %}<a href="{% url "schedule" competition=competition.slug age_group=age_group.slug %}">{% endif %}
-  {{ age_group.name }}
-{% if team %}</a>{% endif %}
-{% if team %}
-&#187;
-{{ age_group.name }}
-{% endif %}
-{% endblock %}
-
 {% block content %}
-
 <section class="row">
   <table class="large-12 columns">
     <thead>

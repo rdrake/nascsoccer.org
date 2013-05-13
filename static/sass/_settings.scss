@@ -1157,7 +1157,7 @@ $primary-color: #924a9c;
 
 // Background color for the top bar
 
-// $topbar-bg: #111;
+$topbar-bg: $primary-color;
 
 // Height and margin
 
@@ -1182,7 +1182,7 @@ $primary-color: #924a9c;
 
 // Top bar dropdown elements
 
-// $topbar-dropdown-bg: #333;
+$topbar-dropdown-bg: $primary-color;
 // $topbar-dropdown-link-color: #fff;
 // $topbar-dropdown-toggle-size: 5px;
 // $topbar-dropdown-toggle-color: #fff;

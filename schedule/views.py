@@ -19,6 +19,7 @@ class GameList(ListView):
 
     context["age_group"] = self.age_group
     context["competition"] = self.competition
+    context["title"] = " | ".join([self.age_group.name, self.competition.name])
 
     return context
 
@@ -33,6 +34,7 @@ class TeamGameList(GameList):
     context = super(TeamGameList, self).get_context_data(**kwargs)
 
     context["team"] = self.team
+    context["title"] = " | ".join([self.team.name, self.age_group.name, self.competition.name])
 
     return context
 
@@ -48,11 +50,19 @@ class AgeGroupList(ListView):
     context = super(AgeGroupList, self).get_context_data(**kwargs)
 
     context["competition"] = self.competition
+    context["title"] = self.competition.name
 
     return context
 
 class CompetitionList(ListView):
   model = Competition
+
+  def get_context_data(self, **kwargs):
+    context = super(CompetitionList, self).get_context_data(**kwargs)
+    
+    context["title"] = "Schedules"
+
+    return context
 
 class ParkList(ListView):
   model = Park

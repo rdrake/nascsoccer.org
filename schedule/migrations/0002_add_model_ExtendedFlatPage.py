@@ -8,24 +8,36 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding field 'Game.bye'
-        db.add_column(u'schedule_game', 'bye',
-                      self.gf('django.db.models.fields.BooleanField')(default=False),
-                      keep_default=False)
+        # Adding model 'ExtendedFlatPage'
+        db.create_table(u'schedule_extendedflatpage', (
+            (u'flatpage_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['flatpages.FlatPage'], unique=True, primary_key=True)),
+            ('parent', self.gf('mptt.fields.TreeForeignKey')(blank=True, related_name='children', null=True, to=orm['schedule.ExtendedFlatPage'])),
+            ('_order', self.gf('django.db.models.fields.IntegerField')(default=0)),
+            ('mptt_left', self.gf('django.db.models.fields.PositiveIntegerField')(db_index=True)),
+            ('mptt_right', self.gf('django.db.models.fields.PositiveIntegerField')(db_index=True)),
+            ('tree_id', self.gf('django.db.models.fields.PositiveIntegerField')(db_index=True)),
+            ('mptt_level', self.gf('django.db.models.fields.PositiveIntegerField')(db_index=True)),
+        ))
+        db.send_create_signal(u'schedule', ['ExtendedFlatPage'])
 
-
-        # Changing field 'Game.home_team'
-        db.alter_column(u'schedule_game', 'home_team_id', self.gf('django.db.models.fields.related.ForeignKey')(null=True, to=orm['schedule.Team']))
 
     def backwards(self, orm):
-        # Deleting field 'Game.bye'
-        db.delete_column(u'schedule_game', 'bye')
+        # Deleting model 'ExtendedFlatPage'
+        db.delete_table(u'schedule_extendedflatpage')
 
-
-        # Changing field 'Game.home_team'
-        db.alter_column(u'schedule_game', 'home_team_id', self.gf('django.db.models.fields.related.ForeignKey')(default=None, to=orm['schedule.Team']))
 
     models = {
+        u'flatpages.flatpage': {
+            'Meta': {'ordering': "(u'url',)", 'object_name': 'FlatPage', 'db_table': "u'django_flatpage'"},
+            'content': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
+            'enable_comments': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'registration_required': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'sites': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['sites.Site']", 'symmetrical': 'False'}),
+            'template_name': ('django.db.models.fields.CharField', [], {'max_length': '70', 'blank': 'True'}),
+            'title': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'url': ('django.db.models.fields.CharField', [], {'max_length': '100', 'db_index': 'True'})
+        },
         u'schedule.agegroup': {
             'Meta': {'ordering': "['name']", 'object_name': 'AgeGroup'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
@@ -39,6 +51,16 @@ class Migration(SchemaMigration):
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'slug': ('django.db.models.fields.SlugField', [], {'max_length': '50'})
+        },
+        u'schedule.extendedflatpage': {
+            'Meta': {'ordering': "(u'_order',)", 'object_name': 'ExtendedFlatPage', '_ormbases': [u'flatpages.FlatPage']},
+            '_order': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
+            u'flatpage_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['flatpages.FlatPage']", 'unique': 'True', 'primary_key': 'True'}),
+            'mptt_left': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
+            'mptt_level': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
+            'mptt_right': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
+            'parent': ('mptt.fields.TreeForeignKey', [], {'blank': 'True', 'related_name': "'children'", 'null': 'True', 'to': u"orm['schedule.ExtendedFlatPage']"}),
+            'tree_id': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'})
         },
         u'schedule.game': {
             'Meta': {'ordering': "['id']", 'object_name': 'Game'},
@@ -76,6 +98,12 @@ class Migration(SchemaMigration):
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'park': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['schedule.Park']"}),
             'slug': ('django.db.models.fields.SlugField', [], {'max_length': '50'})
+        },
+        u'sites.site': {
+            'Meta': {'ordering': "('domain',)", 'object_name': 'Site', 'db_table': "'django_site'"},
+            'domain': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '50'})
         }
     }
 

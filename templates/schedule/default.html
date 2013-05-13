@@ -1,0 +1,23 @@
+{% extends "base.haml" %}
+
+{% block pagetitle %}
+{% if title %}
+  {{ title }}
+  {{ super }}
+{% endif %}
+{% endblock %}
+
+{% block articletitle %}
+<div class="row">
+  <div class="large-12 columns">
+    <h1>
+      {% if title %}
+        {{ title }}
+      {% endif %}
+    </h1>
+  </div>
+</div>
+{% endblock %}
+
+{% block content %}
+{% endblock %}

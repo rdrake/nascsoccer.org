@@ -1,7 +1,5 @@
 import os.path
 
-import django.conf.global_settings as DEFAULT_SETTINGS
-
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -88,7 +86,6 @@ STATICFILES_FINDERS = (
   "django.contrib.staticfiles.finders.FileSystemFinder",
   "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 #  "django.contrib.staticfiles.finders.DefaultStorageFinder",
-  "compressor.finders.CompressorFinder",
 )
 
 # Make this unique, and don"t share it with anybody.
@@ -96,6 +93,8 @@ SECRET_KEY = "6326w8mm=*4yd_+)*jco3l#xq0ry1a#cy3&h&q=73s%p411&!j"
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
+  "django_haml.filesystem.Loader",
+  "django_haml.app_directories.Loader",
   "django.template.loaders.filesystem.Loader",
   "django.template.loaders.app_directories.Loader",
 #   "django.template.loaders.eggs.Loader",
@@ -110,8 +109,15 @@ MIDDLEWARE_CLASSES = (
   # Uncomment the next line for simple clickjacking protection:
   # "django.middleware.clickjacking.XFrameOptionsMiddleware",
   "debug_toolbar.middleware.DebugToolbarMiddleware",
-  'fiber.middleware.ObfuscateEmailAddressMiddleware',
-  'fiber.middleware.AdminPageMiddleware',
+  "django.contrib.flatpages.middleware.FlatpageFallbackMiddleware",
+)
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+  "django.contrib.auth.context_processors.auth",
+  "django.core.context_processors.i18n",
+  "django.core.context_processors.request",
+  "django.core.context_processors.media",
+  "django.core.context_processors.static",
 )
 
 ROOT_URLCONF = "schedule.urls"
@@ -133,21 +139,18 @@ INSTALLED_APPS = (
   "django.contrib.sites",
   "django.contrib.messages",
   "django.contrib.staticfiles",
+  "django.contrib.humanize",
+  "django.contrib.flatpages",
   "mptt",
   "schedule",
+  "filer",
+  "easy_thumbnails",
   # Uncomment the next line to enable the admin:
-  "grappelli",
   "django.contrib.admin",
   "south",
   # Uncomment the next line to enable admin documentation:
   # "django.contrib.admindocs",
   "debug_toolbar",
-  "compressor",
-  "fiber",
-)
-
-TEMPLATE_CONTEXT_PROCESSORS = DEFAULT_SETTINGS.TEMPLATE_CONTEXT_PROCESSORS + (
-  'django.core.context_processors.request',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -184,7 +187,3 @@ INTERNAL_IPS = ("127.0.0.1",)
 DEBUG_TOOLBAR_CONFIG = {
   "INTERCEPT_REDIRECTS": False
 }
-
-FIBER_TEMPLATE_CHOICES = (
-  ("page.html", "Default Page Template"),
-)

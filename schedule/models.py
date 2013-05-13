@@ -1,4 +1,10 @@
 from django.db import models
+from django.contrib.flatpages.models import FlatPage
+
+from mptt.models import MPTTModel, TreeForeignKey
+from filer.fields.image import FilerImageField
+
+from .manager import PageManager
 
 class NamedEntity(models.Model):
   id = models.AutoField(primary_key=True)
@@ -29,7 +35,7 @@ class Team(NamedEntity):
 
 class Park(NamedEntity):
   founded = models.IntegerField(blank=True, null=True)
-  logo = models.ImageField(upload_to="park_logos", blank=True, null=True)
+  logo = FilerImageField(blank=True, null=True)
   
   class Meta:
     ordering = ["name"]
@@ -63,3 +69,43 @@ class Game(models.Model):
 
   class Meta:
     ordering = ["id"]
+
+class ExtendedFlatPage(MPTTModel, FlatPage):
+  parent = TreeForeignKey("self", null=True, blank=True, related_name="children")
+  objects = PageManager()
+
+  class Meta:
+    ordering = ["flatpages__url"]
+    order_with_respect_to = "parent"
+    verbose_name = "page"
+    verbose_name_plural = "pages"
+
+  class MPTTMeta:
+    left_attr = "mptt_left"
+    right_attr = "mptt_right"
+    level_attr = "mptt_level"
+    order_insertion_by = ["title"]
+
+  def is_child_of(self, node):
+    """
+    Returns True if this is a child of the given node.
+    """
+    return (self.tree_id == node.tree_id and
+      self.mptt_left > node.mptt_left and
+      self.mptt_right < node.mptt_right)
+
+  #def get_ancestors(self, *args, **kwargs):
+  #  if getattr(self, "_ancestors_retrieved", False):
+  #    ancestors = []
+  #    node = self
+
+  #    while node.parent_id is not None:
+  #      ancestors.insert(0, node.parent)
+  #      node = node.parent
+  #      
+  #      return ancestors
+  #  else:
+  #    return super(Page, self).get_ancestors(*args, **kwargs)
+
+  def __unicode__(self):
+    return self.url

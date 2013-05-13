@@ -1,5 +1,4 @@
-{% load compress %}
-{% load fiber_tags %}
+{% load menu_tags %}
 
 <!doctype html>
 <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
@@ -14,9 +13,7 @@
 
     <title>{% block pagetitle %}{% endblock %} | Oshawa N.A.S.C. Soccer</title>
 
-    {% compress css %}
     <link rel="stylesheet" href="{{ STATIC_URL }}/css/app.css">
-    {% endcompress %}
   
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
@@ -28,7 +25,7 @@
       <nav class="top-bar">
         <ul class="title-area">
           <li class="name">
-            <h1><a href="/">Oshawa N.A.S.C. Soccer</a></h1>
+            <h1><a href="/">Using an old template</a></h1>
           </li>
           <li class="toggle-topbar menu-icon">
             <a href="#"><span>Menu</span></a>
@@ -47,8 +44,7 @@
       </nav>
     </div>
 
-    {% block content %}
-    {% endblock %}
+    {% block content %}{% endblock %}
 
     <footer class="row">
       <hr>
@@ -58,11 +54,9 @@
       </div>
       <ul id="important-links" class="inline-list large-3 columns">
         <li><a href="/play/house-league/register/">Register</a></li>
-        <li><a href="#">Something</a></li>
       </ul>
     </footer>
 
-    {% compress js %}
     <script>
       document.write('<script src=' + ('__proto__' in {} ? '{{ STATIC_URL }}js/vendor/zepto' : '{{ STATIC_URL }}js/vendor/jquery') + '.js><\/script>')
     </script>
@@ -83,6 +77,5 @@
     <script>
       $(document).foundation();
     </script>
-    {% endcompress %}
   </body>
 </html>

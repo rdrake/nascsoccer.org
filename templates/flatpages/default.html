@@ -1,0 +1,21 @@
+{% extends "base.haml" %}
+
+{% load markdown_tags %}
+
+{% block pagetitle %}{{ flatpage.title }}{{ super }}{% endblock %}
+
+{% block articletitle %}
+<div class="row">
+  <div class="large-12 columns">
+    <h1>{{ flatpage.title }}</h1>
+  </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="content large-12 columns">
+    {{ flatpage.content|markdown }}
+  </div>
+</div>
+{% endblock %}

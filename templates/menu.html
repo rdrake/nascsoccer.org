@@ -1,9 +1,9 @@
-{% load mptt_tags fiber_tags %}
+{% load mptt_tags menu_tags %}
 <ul class="left">
-  {% recursetree fiber_menu_pages %}
+  {% recursetree menu_pages %}
     <li class="
       {{ node.title|slugify }}
-      {% if node in fiber_current_pages %}active{% endif %}
+      {% if node in current_pages %}active{% endif %}
       {% if children %}has-dropdown{% endif %}
     ">
       <a href="{{ node.get_absolute_url }}">{{ node.title }}</a>

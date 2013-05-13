@@ -1,5 +1,6 @@
 from django.contrib import admin
-from schedule.models import AgeGroup, Team, Park, Location, Competition, Game
+from mptt.admin import MPTTModelAdmin
+from schedule.models import AgeGroup, Team, Park, Location, Competition, Game, ExtendedFlatPage
 
 class AgeGroupAdmin(admin.ModelAdmin):
   prepopulated_fields = {"slug": ("name",)}
@@ -24,3 +25,4 @@ admin.site.register(Park, ParkAdmin)
 admin.site.register(Location, LocationAdmin)
 admin.site.register(Competition, CompetitionAdmin)
 admin.site.register(Game)
+admin.site.register(ExtendedFlatPage, MPTTModelAdmin)
