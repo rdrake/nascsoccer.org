@@ -1,4 +1,4 @@
-from .settings import *
+from schedule.settings.common import *
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
