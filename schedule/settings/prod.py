@@ -16,4 +16,6 @@ DATABASES = {
   }
 }
 
+ALLOWED_HOSTS = [".nascsoccer.org"]
+
 SECRET_KEY = os.getenv("SITE_SECRET_KEY", "")
