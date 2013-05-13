@@ -72,8 +72,10 @@ INSTALLED_APPS = (
   "django.contrib.staticfiles",
   "django.contrib.humanize",
   "django.contrib.flatpages",
+  "leaflet",
   "mptt",
   "schedule",
+  "news",
   "filer",
   "easy_thumbnails",
   "django.contrib.admin",
@@ -106,3 +108,6 @@ LOGGING = {
 
 INTERNAL_IPS = ("127.0.0.1",)
 
+LEAFLET_CONFIG = {
+  "TILES_URL": "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+}

@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include, url
-from .views import CompetitionList, GameList, AgeGroupList, ParkList, ParkDetailView, LocationList, LocationDetailView, TeamGameList
+from schedule.views import CompetitionList, GameList, AgeGroupList, ParkList, ParkDetailView, LocationList, LocationDetailView, TeamGameList, HomeView
+from news.views import ItemDetailView
 from django.contrib import admin
 
 admin.autodiscover()
@@ -34,4 +35,14 @@ urlpatterns += patterns("",
 urlpatterns += patterns("",
   url(r"^location/$", LocationList.as_view(), name="locations"),
   url(r"^location/(?P<slug>[\w\d-]+)/$", LocationDetailView.as_view(), name="location"),
+)
+
+# News
+urlpatterns += patterns("",
+  url(r"^news/(?P<slug>[\w\d\-]+)/$", ItemDetailView.as_view(), name="news"),
+)
+
+# Home
+urlpatterns += patterns("",
+  url(r"^$", HomeView.as_view(), name="home")
 )

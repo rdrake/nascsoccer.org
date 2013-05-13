@@ -1,5 +1,8 @@
 {% extends "base.haml" %}
 
+{% load humanize %}
+{% load markdown_tags %}
+
 {% block content %}
 <div class="row">
   <div class="large-12 columns">
@@ -26,11 +29,15 @@
   <div class="large-8 columns">
     <article class="panel">
       <header>
-        <h4>Important Information for 2013 Season Start</h4>
-        <span class="subheader">Posted an hour ago</span>
+        <h4>{{ featured_news.title }}</h4>
+        <p class="text-right subheader">Updated {{ featured_news.updated_at|naturaltime }}</p>
       </header>
-      <p>Content content content...</p>
-      <p><a href="#">Read more</a></p>
+
+      {% autoescape off %}
+        {{ featured_news.content|markdown|truncatewords_html:20 }}
+      {% endautoescape %}
+
+      <span><a href="{% url "news" slug=featured_news.slug %}">Read More</a></span>
     </article>
   </div>
 </div>

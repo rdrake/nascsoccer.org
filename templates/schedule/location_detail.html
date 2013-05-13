@@ -1,1 +1,38 @@
-{{ object.name }}
+{% extends "base.haml" %}
+
+{% load leaflet_tags %}
+
+{% block extracss %}
+  {% leaflet_css %}
+{% endblock %}
+
+{% block extrajs %}
+  {% leaflet_js %}
+{% endblock %}
+
+{% block pagetitle %}
+  {{ object.name }}{{ super }}
+{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="large-12 columns">
+      <h1>{{ object.name }}</h1>
+    </div>
+  </div>
+
+  {% if object.lat and object.lng %}
+    <script>
+      function locationInit(map, bounds) {
+        map.setView([{{ object.lat }}, {{ object.lng }}], 16);
+        L.marker([{{ object.lat }}, {{ object.lng }}]).addTo(map);
+      }
+    </script>
+
+    <div class="row">
+      <div class="large-12 columns">
+        {% leaflet_map "location" %}
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}

@@ -1,6 +1,7 @@
 from django.contrib import admin
 from mptt.admin import MPTTModelAdmin
 from schedule.models import AgeGroup, Team, Park, Location, Competition, Game, ExtendedFlatPage
+from news.models import Item
 
 class AgeGroupAdmin(admin.ModelAdmin):
   prepopulated_fields = {"slug": ("name",)}
@@ -19,6 +20,9 @@ class LocationAdmin(admin.ModelAdmin):
 class CompetitionAdmin(admin.ModelAdmin):
   prepopulated_fields = {"slug": ("name",)}
 
+class ItemAdmin(admin.ModelAdmin):
+  prepopulated_fields = {"slug": ("title",)}
+
 admin.site.register(AgeGroup, AgeGroupAdmin)
 admin.site.register(Team, TeamAdmin)
 admin.site.register(Park, ParkAdmin)
@@ -26,3 +30,4 @@ admin.site.register(Location, LocationAdmin)
 admin.site.register(Competition, CompetitionAdmin)
 admin.site.register(Game)
 admin.site.register(ExtendedFlatPage, MPTTModelAdmin)
+admin.site.register(Item, ItemAdmin)

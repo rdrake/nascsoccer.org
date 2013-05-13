@@ -1,9 +1,11 @@
 from django.db.models import Q
 from django.views.generic import DetailView, ListView
+from django.views.generic.base import TemplateView
 from django.shortcuts import get_object_or_404
 from django.conf import settings
 
-from .models import Game, Competition, AgeGroup, Park, Location, Team
+from schedule.models import Game, Competition, AgeGroup, Park, Location, Team
+from news.models import Item
 
 class GameList(ListView):
   model = Game
@@ -75,3 +77,14 @@ class LocationList(ListView):
 
 class LocationDetailView(DetailView):
   model = Location
+
+class HomeView(TemplateView):
+  template_name = "home.html"
+
+  def get_context_data(self, **kwargs):
+    context = super(HomeView, self).get_context_data(**kwargs)
+
+    context["featured_news"] = Item.objects.filter(is_featured=True).latest("updated_at")
+    context["news"] = Item.objects.all()
+
+    return context
