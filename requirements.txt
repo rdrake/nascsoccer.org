@@ -6,10 +6,11 @@ Pygments==1.6
 South==0.7.6
 django-appconf==0.6
 django-debug-toolbar==0.9.4
--e git+https://github.com/stefanfoulis/django-filer.git@56890ba1f2bc8c641290905fcb7cd5b42c71d7b3#egg=django_filer-dev
+django-filer==0.9.4
 django-grappelli==2.4.4
 django-haml==1.0
 django-ical==1.2
+django-leaflet==0.5.1
 django-mptt==0.5.5
 django-polymorphic==0.4.2
 easy-thumbnails==1.2
