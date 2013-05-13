@@ -27,6 +27,7 @@
     </ul>
   </div>
   <div class="large-8 columns">
+    {% if featured_news %}
     <article class="panel">
       <header>
         <h4>{{ featured_news.title }}</h4>
@@ -39,6 +40,7 @@
 
       <span><a href="{% url "news" slug=featured_news.slug %}">Read More</a></span>
     </article>
+    {% endif %}
   </div>
 </div>
 
