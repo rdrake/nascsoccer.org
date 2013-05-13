@@ -15,10 +15,8 @@
     %meta{:charset => "utf-8"}/
     %title {% block pagetitle %}{% endblock %} | Oshawa N.A.S.C. Soccer
 
-    {% compress css %}
     %link{:href => "{{ STATIC_URL }}css/app.css", :rel => "stylesheet"}/
     {% block extracss %}{% endblock %}
-    {% endcompress %}
 
     %meta{:content => "width=device-width, initial-scale=1.0, maximum-scale=1", :name => "viewport"}/
 
