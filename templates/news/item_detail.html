@@ -16,13 +16,15 @@
 {% block content %}
 <article class="row">
   <div class="large-12 columns">
-    {% if object.updated_at %}
-      Last Updated
-    {% else %}
-      Posted
-    {% endif %}
+    <p class="text-right subheader">
+      {% if object.updated_at %}
+        Last Updated
+      {% else %}
+        Posted
+      {% endif %}
 
-    {{ object.updated_at|naturaltime }}
+      {{ object.updated_at|naturaltime }}
+    </p>
   </div>
 
   <div class="content large-12 columns">

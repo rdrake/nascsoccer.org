@@ -24,8 +24,9 @@
     {% if featured_news %}
     %article.panel
       %header
-        %h4 {{ featured_news.title }}
-        %p.text-right.subheader Updated {{ featured_news.updated_at|naturaltime }}
+        %h4= featured_news.title
+        %p.text-right.subheader Updated 
+          = featured_news.updated_at|naturaltime
 
       {% autoescape off %}
         {{ featured_news.content|markdown|truncatewords_html:20 }}
