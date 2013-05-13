@@ -3,7 +3,7 @@ from django.views.generic.base import TemplateView
 from apps.news.models import Item
 
 class HomeView(TemplateView):
-  template_name = "home.haml"
+  template_name = "common/home.haml"
 
   def get_context_data(self, **kwargs):
     context = super(HomeView, self).get_context_data(**kwargs)
