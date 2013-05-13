@@ -1,12 +1,21 @@
 import os.path
 
+import dj_database_url
+
 ADMINS = (
-  ("Richard Drake", "richard.drake@nascsoccer.org"),
+    ("Richard Drake", "richard.drake@nascsoccer.org"),
 )
+
+DATABASES = {
+    "default": dj_database_url.config(default="postgres://localhost/schedule")
+}
 
 MANAGERS = ADMINS
 
-DJANGO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+DJANGO_ROOT = os.path.dirname(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+)
+
 SITE_ROOT = os.path.dirname(DJANGO_ROOT)
 SITE_NAME = "Oshawa N.A.S.C. Soccer"
 
@@ -26,88 +35,95 @@ MEDIA_URL = "/media/"
 STATIC_ROOT = os.path.normpath(os.path.join(DJANGO_ROOT, "public", "static"))
 STATIC_URL = "/static/"
 
+STATICFILES_DIRS = (
+    os.path.join(DJANGO_ROOT, "project", "static"),
+)
+
 STATICFILES_FINDERS = (
-  "django.contrib.staticfiles.finders.FileSystemFinder",
-  "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 )
 
 TEMPLATE_LOADERS = (
-  "django_haml.filesystem.Loader",
-  "django_haml.app_directories.Loader",
-  "django.template.loaders.filesystem.Loader",
-  "django.template.loaders.app_directories.Loader",
+    "django_haml.filesystem.Loader",
+    "django_haml.app_directories.Loader",
+    "django.template.loaders.filesystem.Loader",
+    "django.template.loaders.app_directories.Loader",
 )
 
 MIDDLEWARE_CLASSES = (
-  "django.middleware.common.CommonMiddleware",
-  "django.contrib.sessions.middleware.SessionMiddleware",
-  "django.middleware.csrf.CsrfViewMiddleware",
-  "django.contrib.auth.middleware.AuthenticationMiddleware",
-  "django.contrib.messages.middleware.MessageMiddleware",
-  "django.contrib.flatpages.middleware.FlatpageFallbackMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.contrib.flatpages.middleware.FlatpageFallbackMiddleware",
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
-  "django.contrib.auth.context_processors.auth",
-  "django.core.context_processors.i18n",
-  "django.core.context_processors.request",
-  "django.core.context_processors.media",
-  "django.core.context_processors.static",
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.request",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
 )
 
-ROOT_URLCONF = "schedule.urls"
+ROOT_URLCONF = "project.urls"
 
-WSGI_APPLICATION = "schedule.wsgi.application"
+WSGI_APPLICATION = "project.wsgi.application"
 
 TEMPLATE_DIRS = (
-  os.path.normpath(os.path.join(DJANGO_ROOT, "templates")),
+    os.path.normpath(os.path.join(DJANGO_ROOT, "templates")),
 )
 
 INSTALLED_APPS = (
-  "django.contrib.auth",
-  "django.contrib.contenttypes",
-  "django.contrib.sessions",
-  "django.contrib.sites",
-  "django.contrib.messages",
-  "django.contrib.staticfiles",
-  "django.contrib.humanize",
-  "django.contrib.flatpages",
-  "leaflet",
-  "mptt",
-  "schedule",
-  "news",
-  "filer",
-  "easy_thumbnails",
-  "django.contrib.admin",
-  "south",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.sites",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "django.contrib.humanize",
+    "django.contrib.flatpages",
+    "leaflet",
+    "mptt",
+    "apps.common",
+    "apps.resources",
+    "apps.schedule",
+    "apps.cms",
+    "apps.news",
+    "filer",
+    "easy_thumbnails",
+    "django.contrib.admin",
+    "south",
 )
 
 LOGGING = {
-  "version": 1,
-  "disable_existing_loggers": False,
-  "filters": {
-    "require_debug_false": {
-      "()": "django.utils.log.RequireDebugFalse"
-    }
-  },
-  "handlers": {
-    "mail_admins": {
-      "level": "ERROR",
-      "filters": ["require_debug_false"],
-      "class": "django.utils.log.AdminEmailHandler"
-    }
-  },
-  "loggers": {
-    "django.request": {
-      "handlers": ["mail_admins"],
-      "level": "ERROR",
-      "propagate": True,
+    "version": 1,
+    "disable_existing_loggers": False,
+    "filters": {
+        "require_debug_false": {
+            "()": "django.utils.log.RequireDebugFalse"
+        }
     },
-  }
+    "handlers": {
+        "mail_admins": {
+            "level": "ERROR",
+            "filters": ["require_debug_false"],
+            "class": "django.utils.log.AdminEmailHandler"
+        }
+    },
+    "loggers": {
+        "django.request": {
+            "handlers": ["mail_admins"],
+            "level": "ERROR",
+            "propagate": True,
+        },
+    }
 }
 
 INTERNAL_IPS = ("127.0.0.1",)
 
 LEAFLET_CONFIG = {
-  "TILES_URL": "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+    "TILES_URL": "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
 }

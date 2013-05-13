@@ -8,9 +8,11 @@ from datetime import datetime
 
 import parsedatetime as pdt
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "schedule.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "project.settings.dev")
 
-from schedule.models import Game, Team, AgeGroup, Location, Competition
+from apps.schedule.models import Game, Team, AgeGroup, Competition
+from apps.resources.models import Location
+
 from django.utils import timezone
 
 p = pdt.Calendar()

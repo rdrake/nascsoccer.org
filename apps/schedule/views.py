@@ -1,11 +1,8 @@
 from django.db.models import Q
-from django.views.generic import DetailView, ListView
-from django.views.generic.base import TemplateView
+from django.views.generic import ListView
 from django.shortcuts import get_object_or_404
-from django.conf import settings
 
-from schedule.models import Game, Competition, AgeGroup, Park, Location, Team
-from news.models import Item
+from .models import Game, Competition, AgeGroup, Team
 
 class GameList(ListView):
   model = Game
@@ -63,33 +60,5 @@ class CompetitionList(ListView):
     context = super(CompetitionList, self).get_context_data(**kwargs)
     
     context["title"] = "Schedules"
-
-    return context
-
-class ParkList(ListView):
-  model = Park
-
-class ParkDetailView(DetailView):
-  model = Park
-
-class LocationList(ListView):
-  model = Location
-
-class LocationDetailView(DetailView):
-  model = Location
-
-class HomeView(TemplateView):
-  template_name = "home.haml"
-
-  def get_context_data(self, **kwargs):
-    context = super(HomeView, self).get_context_data(**kwargs)
-
-    try:
-      context["featured_news"] = Item.objects.filter(is_featured=True).latest("updated_at")
-    except:
-      # No featured news.  Not a big deal, really.
-      pass
-
-    context["news"] = Item.objects.all()
 
     return context

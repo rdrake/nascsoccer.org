@@ -7,7 +7,7 @@ import operator
 
 from django import template
 
-from schedule.models import ExtendedFlatPage
+from apps.cms.models import ExtendedFlatPage
 
 register = template.Library()
 
@@ -108,4 +108,4 @@ def show_menu(context, menu_name, min_level, max_level, expand=None):
   context["menu_args"] = {"menu_name": menu_name, "min_level": min_level, "max_level": max_level, "expand": expand}
   return context
 
-register.inclusion_tag("menu.html", takes_context=True)(show_menu)
+register.inclusion_tag("common/menu.html", takes_context=True)(show_menu)
