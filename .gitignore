@@ -1,5 +1,5 @@
-static/admin
-static/filer/
+public/static/admin/
+public/static/filer/
 
 *.log
 *.pot

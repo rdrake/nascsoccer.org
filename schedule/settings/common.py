@@ -20,10 +20,10 @@ USE_TZ = True
 
 TIME_FORMAT = "h:i A"
 
-MEDIA_ROOT = os.path.normpath(os.path.join(DJANGO_ROOT, "media"))
+MEDIA_ROOT = os.path.normpath(os.path.join(DJANGO_ROOT, "public", "media"))
 MEDIA_URL = "/media/"
 
-STATIC_ROOT = os.path.normpath(os.path.join(DJANGO_ROOT, "static"))
+STATIC_ROOT = os.path.normpath(os.path.join(DJANGO_ROOT, "public", "static"))
 STATIC_URL = "/static/"
 
 STATICFILES_FINDERS = (
