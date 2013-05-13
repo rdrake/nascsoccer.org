@@ -1,0 +1,52 @@
+{% extends "base.haml" %}
+
+{% load humanize %}
+{% load markdown_tags %}
+
+{% block content %}
+%div.row
+  %div.large-12.columns
+    -# Original HAML syntax should be %ul{:"data-orbit" => "data-orbit"}
+    %ul{'data-orbit': None}
+      %li
+        %img{:src => "http://placehold.it/1000x400&text=[img]"}
+        %div.orbit-caption Something something something...
+      %li
+        %img{:src => "http://placehold.it/1000x400&text=[img]"}
+        %div.orbit-caption Something something something...
+
+%div.row
+  %div.large-4.columns
+    %h3 Upcoming Events
+    %ul
+      %li Coach's Meeting
+  %div.large-8.columns
+    {% if featured_news %}
+    %article.panel
+      %header
+        %h4 {{ featured_news.title }}
+        %p.text-right.subheader Updated {{ featured_news.updated_at|naturaltime }}
+
+      {% autoescape off %}
+        {{ featured_news.content|markdown|truncatewords_html:20 }}
+      {% endautoescape %}
+
+      %span
+        %a{:href => "{% url 'news' slug=featured_news.slug %}"} Read More
+    {% endif %}
+
+%div.row
+  %hr
+
+  %ul.small-block-grid-5
+    %li
+      %img{:src => "{{ STATIC_URL }}images/logos/x128/occna.png"}
+    %li
+      %img{:src => "{{ STATIC_URL }}images/logos/x128/nascsports.png"}
+    %li
+      %img{:src => "{{ STATIC_URL }}images/logos/x128/nascsoftball.png"}
+    %li
+      %img{:src => "{{ STATIC_URL }}images/logos/x128/naschockey.png"}
+    %li
+      %img{:src => "{{ STATIC_URL }}images/logos/x128/oshawaturul.png"}
+{% endblock %}
