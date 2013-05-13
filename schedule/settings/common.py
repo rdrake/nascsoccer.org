@@ -6,7 +6,7 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-DJANGO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DJANGO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 SITE_ROOT = os.path.dirname(DJANGO_ROOT)
 SITE_NAME = "Oshawa N.A.S.C. Soccer"
 
