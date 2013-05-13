@@ -4,6 +4,7 @@ PIL==1.1.7
 Pillow==2.0.0
 Pygments==1.6
 South==0.7.6
+dj-database-url==0.2.1
 django-appconf==0.6
 django-debug-toolbar==0.9.4
 django-filer==0.9.4
