@@ -42,6 +42,7 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+    "compressor.finders.CompressorFinder",
 )
 
 TEMPLATE_LOADERS = (
@@ -96,6 +97,7 @@ INSTALLED_APPS = (
     "easy_thumbnails",
     "django.contrib.admin",
     "south",
+    "compressor",
 )
 
 LOGGING = {
