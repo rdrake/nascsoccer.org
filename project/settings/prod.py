@@ -21,7 +21,7 @@ CACHES = {
 #    "compressor.filters.cssmin.CSSMinFilter",
 #]
 #
-COMPRESS_STORAGE = (
+#COMPRESS_STORAGE = (
 #    "compressor.storage.CompressorFileStorage",
-    "compressor.storage.GzipCompressorFileStorage",
-)
+#    "compressor.storage.GzipCompressorFileStorage",
+#)
