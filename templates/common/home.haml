@@ -21,24 +21,28 @@ Home
 
 %div.row
   %div.large-4.columns
-    %h3 Upcoming Events
+    %h3
+      %a{:href => "{% url 'news' %}"} News
     %ul
-      %li Coach's Meeting
+      - for item in news
+        %li
+          %a{:href => "{% url 'news_item' year=item.updated_at.year month=item.updated_at.month slug=item.slug %}"}= item.title
+          %span.subheader
+            \- Posted
+            = item.updated_at|naturaltime
   %div.large-8.columns
-    {% if featured_news %}
-    %article.panel
-      %header
-        %h4= featured_news.title
-        %p.text-right.subheader Updated 
-          = featured_news.updated_at|naturaltime
+    - if featured_news
+      %article.panel
+        %header
+          %h4= featured_news.title
+          %p.text-right.subheader= featured_news.updated_at|naturaltime
 
-      {% autoescape off %}
-        {{ featured_news.content|markdown|truncatewords_html:20 }}
-      {% endautoescape %}
+        {% autoescape off %}
+          {{ featured_news.content|markdown|truncatewords_html:20 }}
+        {% endautoescape %}
 
-      %span
-        %a{:href => "{% url 'news' slug=featured_news.slug %}"} Read More
-    {% endif %}
+        %span
+          %a{:href => "{% url 'news_item' year=featured_news.updated_at.year month=featured_news.updated_at.month slug=featured_news.slug %}"} Read More
 
 %div.row
   %hr
