@@ -13,8 +13,12 @@ Home
     -# Original HAML syntax should be %ul{:"data-orbit" => "data-orbit"}
     %ul{'data-orbit': None}
       %li
-        %img{:src => "http://placehold.it/1000x400&text=[img]"}
-        %div.orbit-caption Something something something...
+        %img{:src => "{{ STATIC_URL }}images/banners/hockey_1.jpg"}/
+        %div.orbit-caption
+          %strong N.A.S.C. Hockey Registration
+          Registration for the N.A.S.C. Hockey program is underway... [
+          %a{:href => "http://naschockeyoshawa.org/NASC_Programs_2013_fees.htm"} More
+          ]
       %li
         %img{:src => "http://placehold.it/1000x400&text=[img]"}
         %div.orbit-caption Something something something...
@@ -49,13 +53,18 @@ Home
 
   %ul.small-block-grid-5
     %li
-      %img{:src => "{{ STATIC_URL }}images/logos/x128/occna.png"}
+      %a{:href => "http://occnaoshawa.org/"}
+        %img{:src => "{{ STATIC_URL }}images/logos/x128/occna.png"}
     %li
-      %img{:src => "{{ STATIC_URL }}images/logos/x128/nascsports.png"}
+      %a{:href => "http://www.nascsportsoshawa.org/"}
+        %img{:src => "{{ STATIC_URL }}images/logos/x128/nascsports.png"}
     %li
-      %img{:src => "{{ STATIC_URL }}images/logos/x128/nascsoftball.png"}
+      %a{:href => "http://nascsoftball.org/"}
+        %img{:src => "{{ STATIC_URL }}images/logos/x128/nascsoftball.png"}
     %li
-      %img{:src => "{{ STATIC_URL }}images/logos/x128/naschockey.png"}
+      %a{:href => "http://naschockeyoshawa.org/"}
+        %img{:src => "{{ STATIC_URL }}images/logos/x128/naschockey.png"}
     %li
-      %img{:src => "{{ STATIC_URL }}images/logos/x128/oshawaturul.png"}
+      %a{:href => "http://oshawaturul.com/"}
+        %img{:src => "{{ STATIC_URL }}images/logos/x128/oshawaturul.png"}
 {% endblock %}

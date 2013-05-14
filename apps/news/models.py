@@ -1,4 +1,3 @@
-from django.core.urlresolvers import reverse
 from django.db import models
 
 class Item(models.Model):
@@ -14,16 +13,8 @@ class Item(models.Model):
 
     content = models.TextField()
 
-    #@models.permalink
-    #def get_absolute_url(self):
-    #    return reverse("news_item",
-    #        kwargs={
-    #            "slug": self.slug,
-    #            "year": self.updated_at.year,
-    #            "month": self.updated_at.month
-    #        })
-        #return ("news_item", (), {
-        #    "slug": self.slug,
-        #    "year": self.created_at.year,
-        #    "month": self.created_at.month
-        #})
+    def __unicode__(self):
+        return self.title
+
+    class Meta:
+        ordering = ["-created_at"]
