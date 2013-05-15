@@ -1,0 +1,42 @@
+{% extends "base.haml" %}
+
+{% load markdown_tags %}
+{% load humanize %}
+
+{% block pagetitle %}News{{ super }}{% endblock %}
+
+{% block articletitle %}
+<div class="row">
+  <div class="large-12 columns">
+    <h1>News</h1>
+  </div>
+</div>
+{% endblock %}
+
+{% block content %}
+{% for news in object_list %}
+<article class="row panel">
+  <header class="large-12 columns">
+    <h1>{{ news.title }}</h1>
+
+    <div class="large-12 columns">
+      <p class="text-right subheader">
+        {% if news.updated_at %}
+          Last Updated
+        {% else %}
+          Posted
+        {% endif %}
+
+        {{ news.updated_at|naturaltime }}
+      </p>
+    </div>
+  </header>
+
+  <div class="content large-12 columns">
+    {% autoescape off %}
+      {{ news.content|markdown|truncatewords_html:100 }}
+    {% endautoescape %}
+  </div>
+</article>
+{% endfor %}
+{% endblock %}
