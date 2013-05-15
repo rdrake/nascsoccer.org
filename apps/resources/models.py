@@ -15,5 +15,8 @@ class Location(NamedEntity):
     lat = models.FloatField(blank=True, null=True)
     lng = models.FloatField(blank=True, null=True)
 
+    status = models.CharField(max_length=50)
+    updated_at = models.DateTimeField(auto_now=True)
+
     class Meta:
         ordering = ["name"]

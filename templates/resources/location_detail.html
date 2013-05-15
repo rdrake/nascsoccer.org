@@ -24,6 +24,7 @@
   {% if object.lat and object.lng %}
     <script>
       function locationInit(map, bounds) {
+        L.Icon.Default.imagePath = "{{ STATIC_URL }}leaflet/images";
         map.setView([{{ object.lat }}, {{ object.lng }}], 16);
         L.marker([{{ object.lat }}, {{ object.lng }}]).addTo(map);
       }

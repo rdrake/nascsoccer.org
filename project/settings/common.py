@@ -1,6 +1,11 @@
 import os.path
 
 import dj_database_url
+import djcelery
+
+from celery.schedules import crontab
+
+djcelery.setup_loader()
 
 ADMINS = (
     ("Richard Drake", "richard.drake@nascsoccer.org"),
@@ -91,6 +96,7 @@ INSTALLED_APPS = (
     "django.contrib.humanize",
     "django.contrib.flatpages",
     "leaflet",
+    "djcelery",
     "mptt",
     "apps.common",
     "apps.resources",
@@ -138,5 +144,19 @@ CACHES = {
     "default": {
         "BACKEND": "redis_cache.RedisCache",
         "LOCATION": "/tmp/redis.sock",
+    }
+}
+
+BROKER_URL = "redis://"
+
+CELERYBEAT_SCHEDULE = {
+    "check-field-status": {
+        "task": "apps.resources.tasks.update_field_status",
+        "schedule": crontab(
+            minute=45,
+            hour="*/6,14-17",
+            day_of_week="mon-fri",
+            month_of_year="5-9"
+        ),
     }
 }
