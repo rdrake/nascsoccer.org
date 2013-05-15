@@ -1,12 +1,25 @@
 {% extends "base.haml" %}
 
 {% block pagetitle %}Not Found{% endblock %}
-{% block articletitle %}Not Found {% endblock %}
 
 {% block content %}
 <div class="row">
   <div class="large-12 columns">
+    <h1>Not Found</h1>
+
     <p>Sorry, we couldn't find what you were looking for.  Our site has recently changed.  Please try one of the links above.</p>
+
+    <p>Were you looking for any of these?</p>
+
+    <ul>
+      <li><a href="/schedule/">Schedules</a></li>
+      <li>Programs
+        <ul>
+          <li><a href="/play/house-league/">House League</a></li>
+          <li><a href="/play/all-star/">All-Star</a></li>
+        </ul>
+      </li>
+    </ul>
   </div>
 </div>
 {% endblock %}
