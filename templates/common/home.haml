@@ -13,15 +13,16 @@ Home
     -# Original HAML syntax should be %ul{:"data-orbit" => "data-orbit"}
     %ul{'data-orbit': None}
       %li
+        %img{:src => "{{ STATIC_URL }}images/banners/kedron_u8b_1.jpg"}/
+      %li
+        %img{:src => "{{ STATIC_URL }}images/banners/kedron_u8b_2.jpg"}/
+      %li
         %img{:src => "{{ STATIC_URL }}images/banners/hockey_1.jpg"}/
         %div.orbit-caption
           %strong N.A.S.C. Hockey Registration
           Registration for the N.A.S.C. Hockey program is underway... [
           %a{:href => "http://naschockeyoshawa.org/NASC_Programs_2013_fees.htm"} More
           ]
-      -#%li
-        %img{:src => "http://placehold.it/1000x400&text=[img]"}
-        %div.orbit-caption Something something something...
 
 %div.row
   %div.large-4.columns
