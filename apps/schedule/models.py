@@ -22,6 +22,11 @@ class Team(NamedEntity):
 class Competition(NamedEntity):
     age_groups = models.ManyToManyField(AgeGroup)
 
+    def get_absolute_url(self):
+        return ("age_group", (), {
+            "competition": self.slug
+        })
+
 class Game(models.Model):
     id = models.AutoField(primary_key=True)
     when = models.DateTimeField()
@@ -38,6 +43,12 @@ class Game(models.Model):
     location = models.ForeignKey(Location, blank=True, null=True)
 
     bye = models.BooleanField(default=False)
+
+    def __unicode__(self):
+        return "%s vs. %s" % (
+            self.home_team.name,
+            self.away_team.name
+        )
 
     class Meta:
         ordering = ["id"]
