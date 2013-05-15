@@ -5,7 +5,7 @@ import os
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
-ALLOWED_HOSTS = [".nascsoccer.org", ".rdrake.org"]
+ALLOWED_HOSTS = [".nascsoccer.org", "192.95.26.56", "ks397485.ip-192-95-26.net"]
 
 SECRET_KEY = os.getenv("SITE_SECRET_KEY", "")
 
