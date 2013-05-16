@@ -138,6 +138,8 @@ INTERNAL_IPS = ("127.0.0.1",)
 
 LEAFLET_CONFIG = {
     "TILES_URL": "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+    "SCALE": False,
+    "MINIMAP": False,
 }
 
 CACHES = {

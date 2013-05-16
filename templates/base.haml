@@ -39,6 +39,8 @@
               %span Menu
         %section.top-bar-section
           {% show_menu "mainmenu" 1 999 "all" %}
+
+    {% block breadcrumbs %}{% endblock %}
     {% block articletitle %}{% endblock %}
     {% block content %}{% endblock %}
     %footer.row

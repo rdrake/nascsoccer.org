@@ -3,6 +3,45 @@
 {% load tz %}
 {% load cache %}
 
+{% block breadcrumbs %}
+<div class="row">
+  <div class="large-12 columns">
+    <ul class="breadcrumbs">
+      <li><a href="{% url "competition" %}">Schedules</a></li>
+      <li>
+        <a href="{% url "age_group" competition=competition.slug %}">
+          {{ competition.name }}
+        </a>
+      </li>
+      <li{% if not team %} class="current"{% endif %}>
+        <a href="{% if team %}{% url "schedule" competition=competition.slug age_group=age_group.slug %}{% else %}#{% endif %}">
+          {{ age_group.name }}
+        </a>
+      </li>
+      {% if team %}
+        <li class="current">
+          <a href="#">{{ team.name }}</a>
+        </li>
+      {% endif %}
+    </ul>
+  </div>
+</div>
+{% endblock %}
+
+{% block articletitle %}
+  <div class="row">
+    <header class="large-12 columns">
+      <h1>
+        {% if team %}
+          {{ team.name }}
+        {% else %}
+          {{ age_group.name }}
+        {% endif %}
+      </h1>
+    </header>
+  </div>
+{% endblock %}
+
 {% block content %}
 <section class="row">
   <table class="large-12 columns">
