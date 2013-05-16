@@ -39,6 +39,9 @@
               %span Menu
         %section.top-bar-section
           {% show_menu "mainmenu" 1 999 "all" %}
+          %ul.right
+            %li.has-form
+              %a.button{:href => "/schedule/"} Schedules
 
     {% block breadcrumbs %}{% endblock %}
     {% block articletitle %}{% endblock %}
