@@ -1,0 +1,13 @@
+@media print {
+  a[href]:after {
+    content: "" !important;
+  }
+
+  a, a:visited, a:hover {
+    text-decoration: none;
+  }
+
+  thead {
+    display: table-header-group;
+  }
+}

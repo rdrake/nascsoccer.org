@@ -28,7 +28,7 @@
     %script{:src => "{{ STATIC_URL }}js/vendor/custom.modernizr.js"}
     {% endcompress %}
   %body#index.home
-    .contain-to-grid
+    .contain-to-grid.hide-on-print
       %nav.top-bar
         %ul.title-area
           %li.name
@@ -46,7 +46,8 @@
     {% block breadcrumbs %}{% endblock %}
     {% block articletitle %}{% endblock %}
     {% block content %}{% endblock %}
-    %footer.row
+
+    %footer.row.hide-on-print
       %hr/
       #copyright-notice.large-6.columns
         Copyright &copy; 2013 Oshawa N.A.S.C. Soccer.  All rights reserved.
