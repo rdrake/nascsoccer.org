@@ -9,7 +9,7 @@ class AgeGroup(NamedEntity):
     standings = models.BooleanField(default=True)
 
     class Meta:
-        ordering = ["name"]
+        ordering = ["id"]
 
 class Team(NamedEntity):
     park = models.ForeignKey(Park)

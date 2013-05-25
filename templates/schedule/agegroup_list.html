@@ -27,7 +27,13 @@
   <section class="row">
     <ul class="large-12 columns">
       {% for age_group in object_list %}
-      <li><a href="{% url "schedule" competition=competition.slug age_group=age_group.slug %}">{{ age_group.name }}</a></li>
+      <li>
+        <a href="{% url "schedule" competition=competition.slug age_group=age_group.slug %}">{{ age_group.name }}</a>
+      
+        {% if age_group.standings %}
+          (<a href="{% url "standings" competition=competition.slug age_group=age_group.slug %}">Standings</a>)
+        {% endif %}
+      </li>
       {% endfor %}
     </ul>
   </section>

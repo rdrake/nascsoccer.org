@@ -54,7 +54,7 @@
     <tbody>
       {% for team, stats in standings.iteritems %}
       <tr>
-        <td>{{ team.name }}</td>
+        <td><a href="{% url "team_schedule" competition=competition.slug age_group=age_group.slug team=team.slug %}">{{ team.name }}</a></td>
         <td>{{ stats.points }}</td>
         <td>{{ stats.wins }}</td>
         <td>{{ stats.ties }}</td>
