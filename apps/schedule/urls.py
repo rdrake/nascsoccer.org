@@ -16,6 +16,11 @@ urlpatterns = patterns("",
         name="schedule"
     ),
     url(
+        r"^(?P<competition>[\w\d-]+)/(?P<age_group>[\w\d-]+)/standings/$",
+        StandingsList.as_view(),
+        name="standings"
+    ),
+    url(
         r"^(?P<competition>[\w\d-]+)/(?P<age_group>[\w\d-]+)/(?P<team>[\w\d-]+)/$",
         TeamGameList.as_view(),
         name="team_schedule"

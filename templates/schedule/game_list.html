@@ -110,5 +110,10 @@
       {% endfor %}
     </tbody>
   </table>
+  {% if not team and age_group.standings %}
+    <div class="large-12 columns">
+      <a href="{% url "standings" competition=competition.slug age_group=age_group.slug %}" class="small button right">Standings</a>
+    </div>
+  {% endif %}
 </section>
 {% endblock %}

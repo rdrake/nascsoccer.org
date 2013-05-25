@@ -1,0 +1,70 @@
+{% extends "schedule/default.html" %}
+
+{% load tz %}
+{% load cache %}
+
+{% block breadcrumbs %}
+<div class="row hide-on-print">
+  <div class="large-12 columns">
+    <ul class="breadcrumbs">
+      <li><a href="{% url "competition" %}">Schedules</a></li>
+      <li>
+        <a href="{% url "age_group" competition=competition.slug %}">
+          {{ competition.name }}
+        </a>
+      </li>
+      <li>
+        <a href="{% url "schedule" competition=competition.slug age_group=age_group.slug %}">
+          {{ age_group.name }}
+        </a>
+      </li>
+      <li class="current">
+        <a href="#">Standings</a>
+      </li>
+    </ul>
+  </div>
+</div>
+{% endblock %}
+
+{% block articletitle %}
+  <div class="row">
+    <header class="large-12 columns">
+      <h1>
+        {{ age_group.name }}
+      </h1>
+    </header>
+  </div>
+{% endblock %}
+
+{% block content %}
+<section class="row">
+  <table class="large-12 columns">
+    <thead>
+      <tr>
+        <th>Team</th>
+        <th>Points</th>
+        <th>Wins</th>
+        <th>Ties</th>
+        <th>Losses</th>
+        <th>Goals For</th>
+        <th>Goals Against</th>
+        <th>Goals (+/-)</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for team, stats in standings.iteritems %}
+      <tr>
+        <td>{{ team.name }}</td>
+        <td>{{ stats.points }}</td>
+        <td>{{ stats.wins }}</td>
+        <td>{{ stats.ties }}</td>
+        <td>{{ stats.losses }}</td>
+        <td>{{ stats.gf }}</td>
+        <td>{{ stats.ga }}</td>
+        <td>{{ stats.gd }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}
