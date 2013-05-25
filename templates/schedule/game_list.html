@@ -58,13 +58,25 @@
     <tbody>
       {% for game in object_list %}
       <tr>
-        <td>{{ game.when|date }}</td>
-        <td>{{ game.when|time }}</td>
+        <td>
+          {% ifchanged game.when %}
+            {{ game.when|date }}
+          {% endifchanged %}
+        </td>
+        <td>
+          {% ifchanged game.when %}
+            {{ game.when|time }}
+          {% endifchanged %}
+        </td>
         <td>
           {% if game.home_team %}
             <a href="{% url "team_schedule" competition=competition.slug age_group=age_group.slug team=game.home_team.slug %}">
               {{ game.home_team.name }}
             </a>
+
+            {% if age_group.standings and game.home_score != None %}
+              ({{ game.home_score_norm }})
+            {% endif %}
           {% else %}
             TBA
           {% endif %}
@@ -75,6 +87,10 @@
             <a href="{% url "team_schedule" competition=competition.slug age_group=age_group.slug team=game.away_team.slug %}">
               {{ game.away_team.name }}
             </a>
+
+            {% if age_group.standings and game.away_score != None %}
+              ({{ game.away_score_norm }})
+            {% endif %}
           {% else %}
             {% if game.bye %}
               "bye"

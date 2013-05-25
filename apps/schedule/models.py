@@ -3,6 +3,8 @@ from django.db import models
 from apps.common.models import NamedEntity
 from apps.resources.models import Location, Park
 
+MAX_DIFFERENCE = 7
+
 class AgeGroup(NamedEntity):
     standings = models.BooleanField(default=True)
 
@@ -12,9 +14,6 @@ class AgeGroup(NamedEntity):
 class Team(NamedEntity):
     park = models.ForeignKey(Park)
     age_group = models.ForeignKey(AgeGroup)
-
-    def __unicode__(self):
-        return "%s - %s" % (self.age_group.name, self.name)
 
     class Meta:
         ordering = ["park__name", "name"]
@@ -44,11 +43,24 @@ class Game(models.Model):
 
     bye = models.BooleanField(default=False)
 
-    def __unicode__(self):
-        return "%s vs. %s" % (
-            self.home_team.name,
-            self.away_team.name
-        )
-
     class Meta:
-        ordering = ["id"]
+        ordering = ["when"]
+
+    def _get_home_score(self):
+        difference = self.home_score - self.away_score
+
+        if difference > MAX_DIFFERENCE:
+            return self.home_score - difference + MAX_DIFFERENCE
+        
+        return self.home_score
+
+    def _get_away_score(self):
+        difference = self.away_score - self.home_score
+
+        if difference > MAX_DIFFERENCE:
+            return self.away_score - difference + MAX_DIFFERENCE 
+
+        return self.away_score
+
+    home_score_norm = property(_get_home_score)
+    away_score_norm = property(_get_away_score)
