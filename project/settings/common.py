@@ -15,6 +15,12 @@ DATABASES = {
     "default": dj_database_url.config(default="postgres://localhost/schedule")
 }
 
+DATABASES["default"]["ENGINE"] = "django_postgrespool"
+
+SOUTH_DATABASE_ADAPTERS = {
+    "default": "south.db.postgresql_psycopg2"
+}
+
 MANAGERS = ADMINS
 
 DJANGO_ROOT = os.path.dirname(
