@@ -3,10 +3,7 @@ import sys
 import os
 import pytz
 
-from time import mktime
 from datetime import datetime
-
-import parsedatetime as pdt
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "project.settings.dev")
 
@@ -14,8 +11,6 @@ from apps.schedule.models import Game, Team, AgeGroup, Competition
 from apps.resources.models import Location
 
 from django.utils import timezone
-
-p = pdt.Calendar()
 
 age_group_str = sys.argv[1].split("/")[-1].replace(".csv", "")
 competition_str = sys.argv[1].split("/")[-2]
@@ -34,6 +29,17 @@ with open(sys.argv[1], "rU") as csvfile:
         away_team_str = row[4].strip()
         location_str = row[6].strip().title()
 
+        home_team_score = None
+        away_team_score = None
+
+        try:
+            # If we can't get the home score, no point in trying to get the
+            # away score anyway.
+            home_team_score = int(row[3].strip())
+            away_team_score = int(row[5].strip())
+        except:
+            pass
+
         if location_str.lower() == "mackenzie":
             location_str = "MacKenzie"
 
@@ -47,7 +53,6 @@ with open(sys.argv[1], "rU") as csvfile:
             location_str = "McLaughlin Park"
 
         result = datetime.strptime(datetime_str, "%Y-%m-%d %I:%M %p")
-        #result = datetime.fromtimestamp(mktime(result))
         result = current_tz.localize(result)
         result = result.astimezone(pytz.UTC)
 
@@ -73,5 +78,5 @@ with open(sys.argv[1], "rU") as csvfile:
                 away = Team.objects.get(age_group=age_group, name=away_team_str)
 
         if sys.argv[2] == "commit":
-            g = Game(when=result, competition=competition, age_group=age_group, home_team=home, away_team=away, location=location, bye=bye)
+            g = Game(when=result, competition=competition, age_group=age_group, home_team=home, home_score=home_team_score, away_team=away, away_score=away_team_score, location=location, bye=bye)
             g.save()
