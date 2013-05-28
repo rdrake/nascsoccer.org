@@ -65,8 +65,9 @@ class StandingsList(GameList):
                     standings[game.home_team]["gf"] += game.home_score_norm
                     standings[game.home_team]["ga"] += game.away_score_norm
 
-                    standings[game.away_team]["gf"] += game.away_score_norm
-                    standings[game.away_team]["ga"] += game.home_score_norm
+                    if not game.bye:
+                        standings[game.away_team]["gf"] += game.away_score_norm
+                        standings[game.away_team]["ga"] += game.home_score_norm
             
             for team, stats in standings.iteritems():
                 standings[team]["gd"] = standings[team]["gf"] - standings[team]["ga"]
