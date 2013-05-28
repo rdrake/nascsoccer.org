@@ -1,13 +1,11 @@
-@media print {
-  a[href]:after {
-    content: "" !important;
-  }
+a[href]:after {
+  content: "" !important;
+}
 
-  a, a:visited, a:hover {
-    text-decoration: none;
-  }
+a, a:visited, a:hover {
+  text-decoration: none;
+}
 
-  thead {
-    display: table-header-group;
-  }
+thead {
+  display: table-header-group;
 }

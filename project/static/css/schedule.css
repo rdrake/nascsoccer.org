@@ -1,16 +1,14 @@
-@media print {
-  /* line 2, ../sass/schedule.scss */
-  a[href]:after {
-    content: "" !important;
-  }
+/* line 1, ../sass/schedule.scss */
+a[href]:after {
+  content: "" !important;
+}
 
-  /* line 6, ../sass/schedule.scss */
-  a, a:visited, a:hover {
-    text-decoration: none;
-  }
+/* line 5, ../sass/schedule.scss */
+a, a:visited, a:hover {
+  text-decoration: none;
+}
 
-  /* line 10, ../sass/schedule.scss */
-  thead {
-    display: table-header-group;
-  }
+/* line 9, ../sass/schedule.scss */
+thead {
+  display: table-header-group;
 }
