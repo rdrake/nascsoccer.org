@@ -9,8 +9,8 @@ FIELD_STATUS_URL = "http://www.oshawa.ca/mun_res/fieldstatus.asp?type=3"
 
 FIELD_MAPPING = {
     "Grandridge": ["Grand Ridge"],
-    "Lakeview Kluane East": ["Lakeview Southeast"],
-    "Lakeview Kluane West": ["Lakeview Southwest"],
+    "Lakeview Kluane East": ["Lakeview Southeast", "Field 1", "Field 2", "Field 3", "Field 4"],
+    "Lakeview Kluane West": ["Lakeview Southwest", "Field 5", "Field 6", "Field 7"],
     "Southmead": ["Southmead Mini"],
     "Southmead 1,2": ["Southmead 1", "Southmead 2"],
     "McLaughlin": ["McLaughlin Park"],
