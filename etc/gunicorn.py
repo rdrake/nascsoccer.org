@@ -4,5 +4,5 @@ def max_workers():
     return cpu_count() * 2 + 1
 
 bind = ["unix:///tmp/gunicorn.sock"]
-worker_class = "gevent"
+#worker_class = "gevent"
 workers = max_workers()
