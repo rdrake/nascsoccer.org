@@ -1,1 +1,16 @@
-@media print{a[href]:after{content:"" !important}a,a:visited,a:hover{text-decoration:none}thead{display:table-header-group}}
+@media print {
+  /* line 2, ../sass/schedule.scss */
+  a[href]:after {
+    content: "" !important;
+  }
+
+  /* line 6, ../sass/schedule.scss */
+  a, a:visited, a:hover {
+    text-decoration: none;
+  }
+
+  /* line 10, ../sass/schedule.scss */
+  thead {
+    display: table-header-group;
+  }
+}

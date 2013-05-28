@@ -2,7 +2,6 @@ require "zurb-foundation"
 
 http_path    = "/" 
 project_path = File.expand_path(".")
-output_style = :compressed
 css_dir      = "css" 
 sass_dir     = "sass" 
 http_javascripts_dir = "js"
