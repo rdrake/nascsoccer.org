@@ -56,7 +56,8 @@ class StandingsList(GameList):
                     if winner:
                         standings[winner]["wins"] += 1
                         standings[winner]["points"] += 3
-                        standings[loser]["losses"] += 1
+                        if not game.bye:
+                            standings[loser]["losses"] += 1
                     else:
                         for team in [game.home_team, game.away_team]:
                             standings[team]["ties"] += 1
