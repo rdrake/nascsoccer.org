@@ -31,8 +31,13 @@ class StandingsList(GameList):
     def _compute_standings(self, context):
         key = "%s:%s" % (context["age_group"].name, context["competition"].name)
 
-        if not cache.get(key + "1"):
-            standings = defaultdict(lambda: defaultdict(int))
+        if not cache.get(key):
+            standings = defaultdict(dict)
+
+            # Handle the case where no standings exist.
+            for team in Team.objects.filter(age_group=context["age_group"]):
+                for stat in "gf ga gd wins ties losses points".split():
+                    standings[team][stat] = 0
 
             for game in context["object_list"]:
                 if game.home_score != None and game.away_score != None:
