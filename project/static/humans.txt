@@ -1,0 +1,8 @@
+/* TEAM */
+Webmaster:  Richard Drake
+Site:  me.rdrake.org
+Location:  Oshawa, Ontario, Canada
+
+/* SITE */
+Standards:  HTML5, CSS3
+Components:  Modernizr, jQuery, Zurb Foundation, Compass, SASS, Django, etc.

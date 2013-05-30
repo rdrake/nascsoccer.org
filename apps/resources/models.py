@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.urlresolvers import reverse
 
 from filer.fields.image import FilerImageField
 
@@ -11,6 +12,9 @@ class Park(NamedEntity):
     class Meta:
         ordering = ["name"]
 
+    def get_absolute_url(self):
+        return reverse("park", kwargs={"slug": self.slug})
+
 class Location(NamedEntity):
     lat = models.FloatField(blank=True, null=True)
     lng = models.FloatField(blank=True, null=True)
@@ -20,3 +24,6 @@ class Location(NamedEntity):
 
     class Meta:
         ordering = ["name"]
+
+    def get_absolute_url(self):
+        return reverse("location", kwargs={"slug": self.slug})

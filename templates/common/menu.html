@@ -1,17 +1,16 @@
 {% load mptt_tags menu_tags %}
-<ul class="left">
-  {% recursetree menu_pages %}
-    <li class="
-      {{ node.title|slugify }}
-      {% if node in current_pages %}active{% endif %}
-      {% if children %}has-dropdown{% endif %}
-    ">
-      <a href="{{ node.get_absolute_url }}">{{ node.title }}</a>
-      {% if children %}
-        <ul class="dropdown">
-          {{ children }}
-        </ul>
-      {% endif %}
-    </li>
-  {% endrecursetree %}
-</ul>
+
+{% recursetree menu_pages %}
+  <li class="
+    {{ node.title|slugify }}
+    {% if node in current_pages %}active{% endif %}
+    {% if children %}has-dropdown{% endif %}
+  ">
+    <a href="{{ node.get_absolute_url }}">{{ node.title }}</a>
+    {% if children %}
+      <ul class="dropdown">
+        {{ children }}
+      </ul>
+    {% endif %}
+  </li>
+{% endrecursetree %}

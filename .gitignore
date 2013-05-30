@@ -65,3 +65,8 @@ nosetests.xml
 .mr.developer.cfg
 .project
 .pydevproject
+
+fts.idx
+celerybeat-schedule
+supervisord.pid
+.env.fish

@@ -1,0 +1,78 @@
+{% extends "base.haml" %}
+
+{% load highlight %}
+{% load markdown_tags %}
+
+{% block pagetitle %}
+{{ super }}
+Search
+{% endblock %}
+
+{% block articletitle %}
+<div class="row">
+  <header class="large-12 columns">
+    <h1>Search</h1>
+  </header>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="large-8 columns">
+    {% if query %}
+      <h2>Results</h2>
+
+      {% for result in page.object_list %}
+        <header>
+          <h4>
+            <a href="{{ result.object.get_absolute_url }}">
+              {% if result.object.title %}
+                {{ result.object.title }}
+              {% else %}
+                {{ result.object.name }}
+              {% endif %}
+            </a>
+          </h4>
+          
+          <h5 class="subheader">{{ result.content_type }}</h5>
+        </header>
+
+        {% if result.content_type == "news.item" or result.content_type == "cms.extendedflatpage" %}
+          {% with result.object.content|markdown as text %}
+            {% highlight text with query %}
+          {% endwith %}
+        {% endif %}
+
+        {% if not forloop.last %}
+          <hr>
+        {% endif %}
+      {% empty %}
+        <p>No results found.</p>
+      {% endfor %}
+
+      {% if page.has_previous or page.has_next %}
+        <div>
+          {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
+          |
+          {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
+        </div>
+      {% endif %}
+    {% else %}
+    <p>Please enter a query in the search box.  Common operators (boolean, wildcard, <a href="http://whoosh.readthedocs.org/en/latest/querylang.html">etc.</a>) are supported.</p>
+    {% endif %}
+  </div>
+
+  <div class="large-4 columns">
+    <div class="panel">
+      <form method="GET" action="{% url "haystack_search" %}">
+        {{ form.q }}
+        <input type="submit" class="small button" value="Search">
+      </form>
+
+      {% if suggestion %}
+        <p>Did you mean <a href="?q={{ suggestion }}">{{ suggestion }}</a>?</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

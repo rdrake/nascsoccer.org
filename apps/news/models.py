@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.urlresolvers import reverse
 
 class Item(models.Model):
     title = models.CharField(max_length=255)
@@ -18,3 +19,10 @@ class Item(models.Model):
 
     class Meta:
         ordering = ["-updated_at"]
+
+    def get_absolute_url(self):
+        return reverse("news_item", kwargs={
+            "year": self.updated_at.year,
+            "month": self.updated_at.month,
+            "slug": self.slug
+        })

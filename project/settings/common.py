@@ -34,7 +34,7 @@ ALLOWED_HOSTS = []
 TIME_ZONE = "America/Toronto"
 LANGUAGE_CODE = "en-us"
 SITE_ID = 1
-USE_I18N = True
+USE_I18N = False
 USE_L10N = True
 USE_TZ = True
 
@@ -57,12 +57,10 @@ STATICFILES_FINDERS = (
 )
 
 TEMPLATE_LOADERS = (
-    ("django.template.loaders.cached.Loader", (
-        "django_haml.filesystem.Loader",
-        "django_haml.app_directories.Loader",
-        "django.template.loaders.filesystem.Loader",
-        "django.template.loaders.app_directories.Loader",
-    )),
+    "django_haml.filesystem.Loader",
+    "django_haml.app_directories.Loader",
+    "django.template.loaders.filesystem.Loader",
+    "django.template.loaders.app_directories.Loader",
 )
 
 MIDDLEWARE_CLASSES = (
@@ -76,7 +74,7 @@ MIDDLEWARE_CLASSES = (
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.auth.context_processors.auth",
-    "django.core.context_processors.i18n",
+    #"django.core.context_processors.i18n",
     "django.core.context_processors.request",
     "django.core.context_processors.media",
     "django.core.context_processors.static",
@@ -102,6 +100,7 @@ INSTALLED_APPS = (
     "leaflet",
     "djcelery",
     "mptt",
+    "haystack",
     "apps.common",
     "apps.resources",
     "apps.schedule",
@@ -164,5 +163,13 @@ CELERYBEAT_SCHEDULE = {
             day_of_week="mon-fri",
             month_of_year="5-9"
         ),
+    }
+}
+
+HAYSTACK_CONNECTIONS = {
+    "default": {
+        "ENGINE": "haystack.backends.whoosh_backend.WhooshEngine",
+        "PATH": os.path.normpath(os.path.join(DJANGO_ROOT, "fts.idx")),
+        "INCLUDE_SPELLING": True,
     }
 }
