@@ -31,7 +31,7 @@ class StandingsList(GameList):
     def _compute_standings(self, context):
         key = "%s:%s" % (context["age_group"].name, context["competition"].name)
 
-        if not cache.get(key):
+        if cache.get(key) is None:
             standings = defaultdict(dict)
 
             # Handle the case where no standings exist.
@@ -73,8 +73,8 @@ class StandingsList(GameList):
             for team, stats in standings.iteritems():
                 standings[team]["gd"] = standings[team]["gf"] - standings[team]["ga"]
 
-            # Place the standings in the cache for an hour.
-            cache.set(key, dict(standings), 60 * 60)
+            # Place the standings in the cache for 10 minutes
+            cache.set(key, dict(standings), 60 * 10)
 
         return cache.get(key)
 
