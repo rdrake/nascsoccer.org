@@ -9,11 +9,11 @@ class HomeView(TemplateView):
         context = super(HomeView, self).get_context_data(**kwargs)
 
         try:
-            context["featured_news"] = Item.objects.filter(is_featured=True).latest("updated_at")
+            context["featured_news"] = Item.objects.filter(is_active=True, is_featured=True).latest("updated_at")
         except:
             # No featured news.    Not a big deal, really.
             pass
 
-        context["news"] = Item.objects.all()[:5]
+        context["news"] = Item.objects.filter(is_active=True)[:5]
 
         return context

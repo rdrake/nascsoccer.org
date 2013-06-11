@@ -28,15 +28,19 @@ def get_field_status():
             if i == FIELD_NAME:
                 field_name = item.string.strip().replace(" Park", "")
             elif i == FIELD_STATUS:
-                field_status = item.string.strip()
+                field_status = item.string.strip().lower()
+
+                if field_status != "open":
+                    field_status = "closed"
+
+                field_status = field_status.capitalize()
         
-        if any([field_status.startswith(x) for x in ["Open", "Closed"]]):
-            try:
-                mapped_fields = FIELD_MAPPING[field_name]
-            except KeyError:
-                mapped_fields = [field_name]
-        
-            for field in mapped_fields:
-                fields[field] = field_status
+        try:
+            mapped_fields = FIELD_MAPPING[field_name]
+        except KeyError:
+            mapped_fields = [field_name]
+    
+        for field in mapped_fields:
+            fields[field] = field_status
 
     return fields

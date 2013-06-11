@@ -16,8 +16,6 @@ def update_field_status():
         try:
             location = Location.objects.get(name=field)
             
-            print(location.name)
-
             location.status = status
             location.save()
         except Exception:
