@@ -417,6 +417,13 @@ table {
   height: 400px;
 }
 
+/* line 14, ../sass/app.scss */
+figcaption {
+  color: #555555;
+  font-size: 90%;
+  padding-top: 1em;
+}
+
 /* line 209, ../../../../../../../usr/local/Cellar/ruby/2.0.0-p195/lib/ruby/gems/2.0.0/gems/zurb-foundation-4.1.6/scss/foundation/components/_global.scss */
 *,
 *:before,
@@ -500,7 +507,7 @@ img {
 }
 
 /* line 254, ../../../../../../../usr/local/Cellar/ruby/2.0.0-p195/lib/ruby/gems/2.0.0/gems/zurb-foundation-4.1.6/scss/foundation/components/_global.scss */
-.text-center {
+.text-center, figcaption {
   text-align: center !important;
 }
 

@@ -24,7 +24,7 @@ Home
     %ul
       - for item in news
         %li
-          %a{:href => "{% url 'news_item' year=item.updated_at.year month=item.updated_at.month slug=item.slug %}"}= item.title
+          %a{:href => "{% url 'news_item' year=item.created_at.year month=item.created_at.month slug=item.slug %}"}= item.title
           %span.subheader
             \- Posted
             = item.updated_at|naturaltime
@@ -40,7 +40,7 @@ Home
         {% endautoescape %}
 
         %span
-          %a{:href => "{% url 'news_item' year=featured_news.updated_at.year month=featured_news.updated_at.month slug=featured_news.slug %}"} Read More
+          %a{:href => "{% url 'news_item' year=featured_news.created_at.year month=featured_news.created_at.month slug=featured_news.slug %}"} Read More
 
 %div.row
   %hr

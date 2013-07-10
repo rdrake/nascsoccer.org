@@ -39,7 +39,7 @@
   </div>
 
   <div class="large-12 columns">
-    <a href="{% url 'news_item' year=news.updated_at.year month=news.updated_at.month slug=news.slug %}">Read More</a>
+    <a href="{% url 'news_item' year=news.created_at.year month=news.created_at.month slug=news.slug %}">Read More</a>
   </div>
 </article>
 {% endfor %}

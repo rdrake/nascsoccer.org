@@ -22,7 +22,7 @@ class Item(models.Model):
 
     def get_absolute_url(self):
         return reverse("news_item", kwargs={
-            "year": self.updated_at.year,
-            "month": self.updated_at.month,
+            "year": self.created_at.year,
+            "month": self.created_at.month,
             "slug": self.slug
         })
