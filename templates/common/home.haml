@@ -10,12 +10,14 @@ Home
 {% block content %}
 %div.row
   %div.large-12.columns
-    -# Original HAML syntax should be %ul{:"data-orbit" => "data-orbit"}
-    %ul{'data-orbit': None}
-      %li
-        %img{:src => "{{ STATIC_URL }}images/banners/kedron_u8b_1.jpg"}/
-      %li
-        %img{:src => "{{ STATIC_URL }}images/banners/kedron_u8b_2.jpg"}/
+    .slideshow-wrapper
+      -# Original HAML syntax should be %ul{:"data-orbit" => "data-orbit"}
+      .preloader
+      %ul{'data-orbit': None}
+        %li
+          %img{:src => "{{ STATIC_URL }}images/banners/kedron_u8b_1.jpg"}/
+        %li
+          %img{:src => "{{ STATIC_URL }}images/banners/kedron_u8b_2.jpg"}/
 
 %div.row
   %div.large-4.columns
