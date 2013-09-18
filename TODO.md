@@ -1,6 +1,9 @@
 # Changes
 
 - Look into adding [fixtures](https://docs.djangoproject.com/en/dev/howto/initial-data/) for data that changes infrequently (parks, locations, age groups, etc.)
+  - Consider using South's [data migrations](http://south.readthedocs.org/en/latest/tutorial/part3.html) as per [mpurdon's suggestion](https://github.com/rdrake/nascsoccer.org/commit/6dd989159cbacb882cec6b7ec5ad3912199a365b#commitcomment-4123974)
+    - Look at upcoming [1.7 migrations](https://docs.djangoproject.com/en/dev/topics/migrations/) if feeling really adventerous
+- Open issues instead of creating difficult to reference and track todo file
 
 # Tools & Libraries
 
