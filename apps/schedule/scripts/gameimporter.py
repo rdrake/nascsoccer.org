@@ -10,16 +10,18 @@ from apps.resources.models import Location
 
 from django.utils import timezone
 
-def run():
-    age_group_str = sys.argv[1].split("/")[-1].replace(".csv", "")
-    competition_str = sys.argv[1].split("/")[-2]
+def run(*script_args):
+    input_path = script_args[0]
+
+    age_group_str = input_path.split("/")[-1].replace(".csv", "")
+    competition_str = input_path.split("/")[-2]
 
     age_group = AgeGroup.objects.get(slug=age_group_str)
     competition = Competition.objects.get(slug=competition_str)
 
     current_tz = tzinfo=timezone.get_current_timezone()
 
-    with open(sys.argv[1], "rU") as csvfile:
+    with open(input_path, "rU") as csvfile:
         reader = csv.reader(csvfile, dialect="excel")
 
         for row in reader:
@@ -32,8 +34,8 @@ def run():
             away_team_score = None
 
             try:
-                # If we can't get the home score, no point in trying to get the
-                # away score anyway.
+                # If we can't get the home score, no point in trying
+                # to get the away score anyway.
                 home_team_score = int(row[3].strip())
                 away_team_score = int(row[5].strip())
             except:
@@ -76,6 +78,6 @@ def run():
                 else:
                     away = Team.objects.get(age_group=age_group, name=away_team_str)
 
-            if sys.argv[2] == "commit":
+            if script_args[1] == "commit":
                 g = Game(when=result, competition=competition, age_group=age_group, home_team=home, home_score=home_team_score, away_team=away, away_score=away_team_score, location=location, bye=bye)
                 g.save()
