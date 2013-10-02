@@ -30,6 +30,8 @@ DEBUG_TOOLBAR_PANELS = (
     "debug_toolbar.panels.sql.SQLDebugPanel",
     "debug_toolbar.panels.signals.SignalDebugPanel",
     "debug_toolbar.panels.logger.LoggingPanel",
-    "haystack.panels.HaystackDebugPanel",
     "template_timings_panel.panels.TemplateTimings.TemplateTimings",
 )
+
+GEOS_LIBRARY_PATH = "/Applications/Postgres.app/Contents/MacOS/lib/libgeos_c.dylib"
+GDAL_LIBRARY_PATH = "/Applications/Postgres.app/Contents/MacOS/lib/libgdal.dylib"

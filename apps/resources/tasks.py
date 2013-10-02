@@ -11,8 +11,6 @@ def update_field_status():
         raise update_field_status.retry(exc=exc)
 
     for (field, status) in field_status.items():
-        print(field)
-
         try:
             location = Location.objects.get(name=field)
             

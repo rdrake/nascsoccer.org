@@ -1,11 +1,6 @@
 import os.path
 
 import dj_database_url
-import djcelery
-
-from celery.schedules import crontab
-
-djcelery.setup_loader()
 
 ADMINS = (
     ("Richard Drake", "richard.drake@nascsoccer.org"),
@@ -15,7 +10,7 @@ DATABASES = {
     "default": dj_database_url.config(default="postgres://localhost/schedule")
 }
 
-DATABASES["default"]["ENGINE"] = "django_postgrespool"
+DATABASES["default"]["ENGINE"] = "django.contrib.gis.db.backends.postgis"
 
 SOUTH_DATABASE_ADAPTERS = {
     "default": "south.db.postgresql_psycopg2"
@@ -98,10 +93,9 @@ INSTALLED_APPS = (
     "django.contrib.staticfiles",
     "django.contrib.humanize",
     "django.contrib.flatpages",
+    "django.contrib.gis",
     "leaflet",
-    "djcelery",
     "mptt",
-    "haystack",
     "apps.common",
     "apps.resources",
     "apps.schedule",
@@ -141,7 +135,7 @@ LOGGING = {
 INTERNAL_IPS = ("127.0.0.1",)
 
 LEAFLET_CONFIG = {
-    "TILES_URL": "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+    "TILES": "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
     "SCALE": False,
     "MINIMAP": False,
 }
@@ -154,23 +148,3 @@ CACHES = {
 }
 
 BROKER_URL = "redis://"
-
-CELERYBEAT_SCHEDULE = {
-    "check-field-status": {
-        "task": "apps.resources.tasks.update_field_status",
-        "schedule": crontab(
-            minute=45,
-            hour="*/6,14-17",
-            day_of_week="mon-fri",
-            month_of_year="5-9"
-        ),
-    }
-}
-
-HAYSTACK_CONNECTIONS = {
-    "default": {
-        "ENGINE": "haystack.backends.whoosh_backend.WhooshEngine",
-        "PATH": os.path.normpath(os.path.join(DJANGO_ROOT, "fts.idx")),
-        "INCLUDE_SPELLING": True,
-    }
-}

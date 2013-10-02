@@ -69,4 +69,6 @@ nosetests.xml
 fts.idx
 celerybeat-schedule
 supervisord.pid
+
 .env.fish
+.idea
