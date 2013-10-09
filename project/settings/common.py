@@ -1,10 +1,12 @@
-import os.path
+import os, os.path
 
 import dj_database_url
 
 ADMINS = (
 	("Richard Drake", "richard.drake@nascsoccer.org"),
 )
+
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 DATABASES = {
 	"default": dj_database_url.config(default="postgres://localhost/schedule"),
@@ -102,7 +104,6 @@ INSTALLED_APPS = (
 	"easy_thumbnails",
 	"django.contrib.admin",
 	"south",
-	"compressor",
 	"django_extensions",
 )
 

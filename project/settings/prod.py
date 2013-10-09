@@ -16,10 +16,3 @@ SECRET_KEY = os.getenv("SITE_SECRET_KEY", "")
 TEMPLATE_LOADERS = (
     ("django.template.loaders.cached.Loader", TEMPLATE_LOADERS),
 )
-
-COMPRESS_CSS_FILTERS = [
-    "compressor.filters.css_default.CssAbsoluteFilter",
-    "compressor.filters.cssmin.CSSMinFilter",
-]
-
-COMPRESS_STORAGE = "compressor.storage.GzipCompressorFileStorage"
