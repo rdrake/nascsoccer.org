@@ -2,7 +2,7 @@ from .common import *
 
 import os
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = ["*"]
