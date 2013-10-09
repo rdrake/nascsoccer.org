@@ -1,4 +1,5 @@
-import os.path
+import os, os.path
+import urlparse
 
 import dj_database_url
 
@@ -137,10 +138,17 @@ LEAFLET_CONFIG = {
 	"MINIMAP": False,
 }
 
+redis_url = os.getenv("REDISTOGO_URL", "redis://localhost:6379/")
+redis_url_parsed = urlparse.urlparse(redis_url)
+
 CACHES = {
 	"default": {
 		"BACKEND": "redis_cache.RedisCache",
-		"LOCATION": "/tmp/redis.sock",
+		"LOCATION": "%s:%s" % (redis_url_parsed.hostname, redis_url_parsed.port),
+		"OPTIONS": {
+			"PASSWORD": redis_url_parsed.password,
+			"DB": 0,
+		},
 	}
 }
 
