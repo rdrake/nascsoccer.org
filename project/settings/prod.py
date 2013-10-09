@@ -5,7 +5,10 @@ import os
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
-ALLOWED_HOSTS = [".nascsoccer.org", "192.95.26.56", "ks397485.ip-192-95-26.net"]
+ALLOWED_HOSTS = ["*"]
+
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 SECRET_KEY = os.getenv("SITE_SECRET_KEY", "")
 
